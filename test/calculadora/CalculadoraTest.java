@@ -5,7 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
-
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -29,6 +30,12 @@ public class CalculadoraTest {
 	}
 	
 	@Test
+	public void testSomaDoisNumerosviaComplemento() {
+		int soma = calc.soma(9, -9);		
+		Assertions.assertEquals(0, soma);		
+	}
+	
+	@Test
 	public void testDivisaoDoisNumeros() {
 		int divisao = calc.divisao(8, 4);
 		assertTrue(divisao == 2);
@@ -49,5 +56,20 @@ public class CalculadoraTest {
 		assertThrows(ArithmeticException.class,
 				() -> calc.divisao(8, 0));
 	}
+	
+	@Test
+	public void testDiferencaNegativos() {
+		assertEquals(1, calc.subtracao(-9, -10));
+	}
+	
+	@Test
+	public void testPositivoBooleanoTrue() {
+		assertTrue(calc.ehPositivo(10));
+	}
+	
 
+	@Test
+	public void testPositivoBooleanoFalse() {
+		assertFalse(calc.ehPositivo(-10));
+	}
 }
